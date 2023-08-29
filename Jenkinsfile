@@ -18,6 +18,14 @@ pipeline {
       steps {
       	sh 'docker build -t mwangifm/spring-petclinic:latest .'
       }
+    stage('Docker Push') {
+    	agent any
+      steps {
+      	withCredentials([usernamePassword(credentialsId: 'Dockerhub', passwordVariable: 'DockerhubPassword', usernameVariable: 'dockerHubUser')]) {
+        	sh "docker login -u ${env.DockerhubUser} -p ${env.DockerhubPassword}"
+          sh 'docker push mwangifm/spring-petclinic:latest'
+        }
+      }
     }
   }
 } 
