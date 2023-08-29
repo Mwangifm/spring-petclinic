@@ -28,7 +28,7 @@ pipeline {
         }
       }
     }
-      post {
+    post {
         // Clean after build
         always {
             cleanWs(cleanWhenNotBuilt: false,
@@ -41,3 +41,4 @@ pipeline {
     } 
   }
 } 
+
